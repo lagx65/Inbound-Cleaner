@@ -27,7 +27,6 @@ def getlims(id):
     r = requests.get(f"https://inventory.roblox.com/v1/users/{id}/assets/collectibles?sortOrder=Asc&limit=100").json()['data']
     for item in r:
         assetids.append(item['assetId'])
-        
 
 def getpages():
     headers = {'X-CSRF-TOKEN': csrftoken}
@@ -40,10 +39,7 @@ def getpages():
                 pages.append(nextpage)
             else:
                 del pages[-1] 
-                
-        
 
-    
 def getinbound():
     headers = {'X-CSRF-TOKEN': csrftoken}
     r = requests.get(f"https://trades.roblox.com/v1/trades/Inbound?sortOrder=Asc&limit=100", cookies=cookies, headers=headers).json()['data']
@@ -84,6 +80,7 @@ def checktrades():
             filtered_partneritems.clear()
         except Exception:
             print("Skipping invalid inbound trade...")
+
 def cancel():
     filtered_invalids = list(dict.fromkeys(invalid))
     print("")
@@ -108,9 +105,7 @@ def cancel():
     print('Now scanning for any new trades...')
     print("")
     main()
-    
-    
-    
+
 data = requests.get("https://www.rolimons.com/itemapi/itemdetails").json()
 def calculate():
     filtered_valids = list(dict.fromkeys(valid))
@@ -142,7 +137,7 @@ def calculate():
         offerval.clear()
         requestval.clear()
     filtered_valids.clear()
-        
+
 def main():
     getlims(id1)
     getpages()
@@ -166,6 +161,7 @@ def main():
                 print('')
                 YN = input(f"Would you like to decline all losses? Y/N: ")
                 print('')
+                #This is really really bad sorry
                 if YN == str('y') or YN == str('Y') or YN == str('N') or YN == str('n'):
                     if YN == str('y') or YN == str('Y'):
                         print("Declining all losses...")
